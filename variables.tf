@@ -35,9 +35,7 @@ variable "component" {
   type = string
 }
 
-variable "port_number" {
-  type = number
-}
+
 
 
 variable "rule_priority" {
