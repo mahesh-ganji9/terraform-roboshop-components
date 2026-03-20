@@ -35,13 +35,10 @@ variable "component" {
   type = string
 }
 
-variable "portnumber" {
+variable "port_number" {
   type = number
 }
 
-variable "health_check_path" {
-  type = string
-}
 
 variable "rule_priority" {
    
