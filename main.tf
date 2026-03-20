@@ -10,14 +10,14 @@ resource "aws_instance" "main" {
 
 resource "terraform_data" "main" {
    triggers_replace = [
-     aws_instance.catalogue.id
+     aws_instance.main.id
    ]
-   depends_on = [ aws_instance.catalogue ]
+   depends_on = [ aws_instance.main ]
    connection {
       type = "ssh"
       user = "ec2-user"
       password = "DevOps321"
-      host = aws_instance.catalogue.private_ip
+      host = aws_instance.main.private_ip
    }
 
    provisioner "file" {
@@ -153,12 +153,12 @@ resource "aws_lb_listener_rule" "main" {
    }
 }
 
-resource "terraform_data" "catalogue_delete" {
+resource "terraform_data" "main" {
   triggers_replace = [
-    aws_instance.catalogue.id
+    aws_instance.main.id
   ]
-  depends_on = [ aws_ami_from_instance.catalogue_ami ]
+  depends_on = [ aws_ami_from_instance.main ]
   provisioner "local-exec" {
-    command = "aws ec2 terminate-instances --instance-ids ${aws_instance.catalogue.id}"
+    command = "aws ec2 terminate-instances --instance-ids ${aws_instance.main.id}"
   }
 }
